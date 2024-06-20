@@ -11,5 +11,7 @@
   --primary-color: rgba(42, 167, 255, 1);
   --secondary-color: rgba(232, 241, 255, 0.47);
   --tertiary-color: rgba(231, 240, 255, 1);
+  --quaternary-color:  rgba(16, 40, 81, 1);
+
   font-family: 'Poppins', sans-serif;
 }

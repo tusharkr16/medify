@@ -13,7 +13,8 @@ module.exports = {
       colors: {
         "primary-color": "var(--primary-color)",
         "secondary-color": "var(--secondary-color)",
-        "tertiary-color": "var(--tertiary-color)", // Corrected key
+        "tertiary-color": "var(--tertiary-color)",
+        "quaternary-color": "var(--quaternary-color)",
       }
     },
   },
