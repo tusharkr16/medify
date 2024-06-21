@@ -10,7 +10,7 @@ import Banner from './Banner';
 
 const Choose = () => {
     return (
-        <div className='w-full h-72 px-10   z-10 flex flex-col justify-center items-center bg-tertiary-color'>
+        <div className='w-full h-72 px-10   z-10 flex flex-col justify-center items-center bg-tertiary-color '>
             <div className='flex space-x-32 mt-7'>
                 <div className="relative text-gray-600 focus-within:text-gray-400">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-2">

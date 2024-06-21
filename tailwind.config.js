@@ -15,6 +15,8 @@ module.exports = {
         "secondary-color": "var(--secondary-color)",
         "tertiary-color": "var(--tertiary-color)",
         "quaternary-color": "var(--quaternary-color)",
+        "poly-colors": "var(--poly-color)",
+        "biny-color": "var(--biny-color)"
       }
     },
   },

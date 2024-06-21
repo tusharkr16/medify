@@ -1,0 +1,39 @@
+.carousel-container {
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px; /* Add some space at the bottom for pagination */
+}
+
+.mySwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  position: relative;
+  bottom: 0; /* Move the pagination to the bottom */
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+   /* Add some margin to separate it from the slides */
+}
+
+.swiper-pagination-bullet {
+  border: 2px solid black;
+}
