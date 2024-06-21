@@ -8,6 +8,8 @@ import Doctor from './Doctors/Doctor';
 import Caring from './Caring';
 import News from './News';
 import Families from './Families';
+import Qouestion from './Qouestion';
+import img from "../assets/Group 1000011073.png"
 
 const HeroSection = () => {
     return (
@@ -59,6 +61,12 @@ const HeroSection = () => {
             </div>
             <div>
                 <Families />
+            </div>
+            <div>
+                <Qouestion />
+            </div>
+            <div className='mt-16'>
+                <img src={img} alt="" />
             </div>
         </div>
     );
