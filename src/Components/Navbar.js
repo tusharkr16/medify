@@ -1,6 +1,7 @@
 // Navbar.jsx
-import React from 'react'
-import logo from '../assets/logo.png'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const navItems = [
@@ -11,6 +12,9 @@ const Navbar = () => {
         { link: 'Software for Provider', path: '/providers' },
         { link: 'Facilities', path: '/facilities' }
     ];
+
+    const activeClassName = 'text-primary-color underline font-semibold py-2';
+
     return (
         <header className='w-full bg-transparent left-0 right-0 transition-all ease-in duration-300'>
             <nav className='container mx-auto px-6'>
@@ -19,16 +23,23 @@ const Navbar = () => {
                         <img src={logo} alt="Medify Logo" /> Medify
                     </div>
 
-                    <ul className=' md:flex space-x-12'>
+                    <ul className='md:flex space-x-12'>
                         {navItems.map(({ link, path }) => (
-                            <li key={path} className='text-quaternary-color text-xl'>{link}</li>
+                            <li key={path} className='text-quaternary-color text-xl cursor-pointer'>
+                                <NavLink
+                                    to={path}
+                                    className={({ isActive }) => isActive ? activeClassName : undefined}
+                                >
+                                    {link}
+                                </NavLink>
+                            </li>
                         ))}
                     </ul>
                     <button className='bg-primary-color text-white px-4 py-2 rounded'>My Bookings</button>
                 </div>
             </nav>
         </header>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

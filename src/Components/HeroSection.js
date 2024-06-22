@@ -10,6 +10,7 @@ import News from './News';
 import Families from './Families';
 import Qouestion from './Qouestion';
 import img from "../assets/Group 1000011073.png"
+import Footer from './Footer';
 
 const HeroSection = () => {
     return (
@@ -65,8 +66,11 @@ const HeroSection = () => {
             <div>
                 <Qouestion />
             </div>
-            <div className='mt-16'>
-                <img src={img} alt="" />
+            <div className='mt-16 '>
+                <img src={img} alt="" className='mx-auto w-full' />
+            </div>
+            <div>
+                <Footer />
             </div>
         </div>
     );
