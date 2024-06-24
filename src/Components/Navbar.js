@@ -19,8 +19,11 @@ const Navbar = () => {
         <header className='w-full bg-transparent left-0 right-0 transition-all ease-in duration-300'>
             <nav className='container mx-auto px-6'>
                 <div className='flex justify-between items-center gap-8'>
+
                     <div className='text-2xl font-bold text-primary-color flex items-center gap-2'>
-                        <img src={logo} alt="Medify Logo" /> Medify
+                        <NavLink to="/">
+                            <img src={logo} alt="Medify Logo" className='cursor-pointer' /> Medify
+                        </NavLink>
                     </div>
 
                     <ul className='md:flex space-x-12'>
