@@ -94,8 +94,8 @@ const FindDoctors = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex bg-tertiary-color h-auto px-32 border'>
-                <div className='w-2/3  h-auto border mt-28'>
+            <div className='flex bg-tertiary-color h-auto px-32'>
+                <div className='w-2/3  h-auto  mt-28'>
                     {data.map((hospital) => (
                         <Card
                             key={hospital.ProviderID} // Assuming ProviderID is unique

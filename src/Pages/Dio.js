@@ -1,128 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../Components/Navbar';
-import { FaSearch } from 'react-icons/fa';
-import Card from '../Components/Card';
-import axios from 'axios';
-import Footer from '../Components/Footer';
-import img2 from "../assets/Group 1000011073.png";
-import Qouestion from '../Components/Qouestion';
-import img from '../assets/sensodyne_dweb.png.png'
+import React, { useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-const FindDoctors = () => {
-    const [states, setStates] = useState([]);
-    const [selectedState, setSelectedState] = useState('');
-    const [selectedCity, setSelectedCity] = useState('');
-    const [data, setData] = useState([]);
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-    useEffect(() => {
-        // Fetch the initial list of states
-        const fetchStates = async () => {
-            try {
-                const response = await axios.get('https://meddata-backend.onrender.com/states');
-                setStates(response.data);
-            } catch (error) {
-                console.error('Error fetching states:', error);
-            }
-        };
+// Import required modules
+import { Navigation } from 'swiper/modules';
+import Slot from '../Components/Slot';
 
-        fetchStates();
-    }, []);
+const Dio = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
 
-    const fetchData = async () => {
-        try {
-            console.log(selectedState, selectedCity);
-            const response = await axios.get(`https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity.toUpperCase()}`);
-            setData(response.data);
-            console.log(response.data); // Log response to verify data
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    const handleSubmit = () => {
-        // Trigger data fetching when button is clicked
-        fetchData();
+    const handleSlideChange = (swiper) => {
+        setActiveIndex(swiper.activeIndex);
     };
 
     return (
-        <>
-            <div className='bg-secondary-color relative h-[50px]'>
-                <div className='bg-primary-color text-center'>
-                    <p className='text-tertiary-color p-2 leading-relaxed'>
-                        The health and wellbeing of our patients and health care team will always be our priority, so we follow the best practices for cleanliness.
-                    </p>
-                </div>
-                <div className='container mx-auto px-9'>
-                    <div className='px-4 py-8'>
-                        <Navbar />
-                    </div>
-                </div>
-                <div className='w-full h-10 bg-primary-color rounded-b-xl'></div>
-                <div className='bg-white w-[896px] left-[300px] absolute top-40 rounded-xl shadow-xl'>
-                    <div className='flex space-x-32 p-7'>
-                        <div className="relative text-gray-600 focus-within:text-gray-400">
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                                <FaSearch />
-                            </span>
-                            <select
-                                className="py-2 pl-10 pr-4 text-sm text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:bg-white focus:border-primary-color"
-                                value={selectedState}
-                                onChange={(e) => setSelectedState(e.target.value)}
-                            >
-                                <option value="">Select State</option>
-                                {states.map((state) => (
-                                    <option key={state} value={state}>{state}</option>
-                                ))}
-                            </select>
+        <div className="max-w-4xl mx-auto p-4 flex flex-col">
+            <Swiper
+                navigation={true}
+                modules={[Navigation]}
+                className="mySwiper"
+                slidesPerView={3}
+                spaceBetween={30}
+                onSlideChange={handleSlideChange}
+            >
+                {[
+                    { label: 'Today', slots: '11 Slots Available', id: 0 },
+                    { label: 'Tommorow', slots: '13 Slots Available', id: 1 },
+                    { label: 'July 3', slots: '16 Slots Available', id: 2 },
+                    { label: 'July 4', slots: '14 Slots Available', id: 3 },
+                    { label: 'July 5', slots: '18 Slots Available', id: 4 },
+                    { label: 'July 6', slots: '11 Slots Available', id: 5 },
+                    { label: 'July 7', slots: '11 Slots Available', id: 6 },
+                    { label: 'July 8', slots: '11 Slots Available', id: 7 },
+                    { label: 'July 9', slots: '11 Slots Available', id: 8 }
+                ].map((slide, index) => (
+                    <SwiperSlide key={index}>
+                        <div className='px-2 flex flex-col'>
+                            <h3 className={`${activeIndex === index ? 'font-semibold text-xl ' : 'text-xl'}`}>{slide.label}</h3>
+                            {slide.slots && (
+                                <p className={`${activeIndex === index ? 'font-bold underline text-sm' : ''} text-green-700 text-sm`}>
+                                    {slide.slots}
+                                </p>
+                            )}
                         </div>
-                        <div className='flex space-x-10'>
-                            <div className="relative text-gray-600 focus-within:text-gray-400">
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                                    <FaSearch />
-                                </span>
-                                <input
-                                    className="py-2 pl-10 pr-4 text-sm text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:bg-white focus:border-primary-color"
-                                    value={selectedCity}
-                                    onChange={(e) => setSelectedCity(e.target.value.toUpperCase())}
-                                />
-                            </div>
-                            <div>
-                                <button className='bg-primary-color text-white px-8 py-2 rounded-lg' onClick={handleSubmit}>My Bookings</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='flex bg-tertiary-color h-[800px] px-32 border border-black '>
-                <div className='w-2/3 h-auto'>
-                    {/* Render cards based on fetched data */}
-                    {data.map((hospital) => (
-                        <Card
-                            key={hospital.ProviderID} // Assuming ProviderID is unique
-                            hospitalName={hospital.HospitalName}
-                            state={hospital.State}
-                            city={hospital.City}
-                        // Add other props as needed
-                        />
-                    ))}
-                </div>
-                <div className='w-1/3 h-auto'>
-                    <div className='mt-[118px] p-6'>
-                        <img src={img} alt="" />
-                    </div>
-                </div>
-            </div>
-            <div>
-                <Qouestion />
-            </div>
-            <div className='mt-16'>
-                <img src={img2} alt="" className='mx-auto w-full' />
-            </div>
-            <div>
-                <Footer />
-            </div>
-        </>
-    );
-};
 
-export default FindDoctors;
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <div className='flex space-x-40 px-20 mt-8 flex-col border border-black'>
+                <Slot />
+            </div>
+        </div>
+    );
+}
+
+export default Dio;
