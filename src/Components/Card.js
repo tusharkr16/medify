@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import Dio from '../Pages/Dio';
 
-const Card = ({ hospitalName, city, state }) => {
+const Card = ({ hospitalName, state, city }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -41,7 +41,7 @@ const Card = ({ hospitalName, city, state }) => {
                     </div>
                     <div className='p-5 flex flex-col justify-end'>
                         <p className='text-green-600 font-semibold text-center mb-2'>Available Today</p>
-                        <button className='bg-primary-color text-white px-4 rounded py-3' onClick={toggleAccordion}>
+                        <button className='bg-primary-color text-white px-4 rounded py-2' onClick={toggleAccordion}>
                             Book FREE Center Visit
                         </button>
                     </div>

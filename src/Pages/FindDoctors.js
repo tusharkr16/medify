@@ -32,12 +32,14 @@ const FindDoctors = () => {
         try {
             console.log(selectedState, selectedCity);
             const response = await axios.get(`https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity.toUpperCase()}`);
-            setData(response.data);
-            console.log(response.data); // Log response to verify data
+            console.log(response.data); // Log response to verify data structure
+            setData(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+
+
 
     const handleSubmit = () => {
         // Trigger data fetching when button is clicked
@@ -98,11 +100,10 @@ const FindDoctors = () => {
                 <div className='w-2/3  h-auto  mt-28'>
                     {data.map((hospital) => (
                         <Card
-                            key={hospital.ProviderID} // Assuming ProviderID is unique
-                            hospitalName={hospital.HospitalName}
+                            key={hospital.ProviderID}
+                            hospitalName={hospital["Hospital Name"]}
                             state={hospital.State}
                             city={hospital.City}
-                        // Add other props as needed
                         />
                     ))}
 
