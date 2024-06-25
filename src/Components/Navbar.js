@@ -38,7 +38,10 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    <button className='bg-primary-color text-white px-4 py-2 rounded'>My Bookings</button>
+                    <NavLink to="/bookings">
+
+                        <button className='bg-primary-color text-white px-4 py-2 rounded'>My Bookings</button>
+                    </NavLink>
                 </div>
             </nav>
         </header>

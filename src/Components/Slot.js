@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Slot = () => {
+const Slot = ({ onSlotClick, activeLabel }) => {
     const slots = {
         morning: ['11:30 AM'],
         afternoon: ['12:00 PM', '12:30 PM'],
@@ -11,6 +11,8 @@ const Slot = () => {
 
     const handleSlotClick = (slot) => {
         setSelectedSlot(slot);
+        onSlotClick(slot);
+        console.log(activeLabel);
     };
 
     return (

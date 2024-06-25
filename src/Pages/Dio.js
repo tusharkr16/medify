@@ -10,13 +10,50 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import Slot from '../Components/Slot';
 
-const Dio = () => {
+const Dio = ({ hospitalName, city, state }) => {
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const slideData = [
+        { label: 'Today', slots: '11 Slots Available', id: 0 },
+        { label: 'Tomorrow', slots: '13 Slots Available', id: 1 },
+        { label: 'July 3', slots: '16 Slots Available', id: 2 },
+        { label: 'July 4', slots: '14 Slots Available', id: 3 },
+        { label: 'July 5', slots: '18 Slots Available', id: 4 },
+        { label: 'July 6', slots: '11 Slots Available', id: 5 },
+        { label: 'July 7', slots: '11 Slots Available', id: 6 },
+        { label: 'July 8', slots: '11 Slots Available', id: 7 },
+        { label: 'July 9', slots: '11 Slots Available', id: 8 }
+    ];
 
     const handleSlideChange = (swiper) => {
         setActiveIndex(swiper.activeIndex);
     };
 
+
+    const handleSlotClick = (slot) => {
+        const activeLabel = slideData[activeIndex].label;
+        const slotData = {
+            slot,
+            hospitalName,
+            city,
+            state,
+            activeLabel
+        };
+
+
+        let existingData = JSON.parse(localStorage.getItem('slotData'));
+
+
+        if (!Array.isArray(existingData)) {
+            existingData = [];
+        }
+
+
+        existingData.push(slotData);
+
+
+        localStorage.setItem('slotData', JSON.stringify(existingData));
+    };
     return (
         <div className="max-w-4xl mx-auto p-4 flex flex-col">
             <Swiper
@@ -27,17 +64,7 @@ const Dio = () => {
                 spaceBetween={30}
                 onSlideChange={handleSlideChange}
             >
-                {[
-                    { label: 'Today', slots: '11 Slots Available', id: 0 },
-                    { label: 'Tommorow', slots: '13 Slots Available', id: 1 },
-                    { label: 'July 3', slots: '16 Slots Available', id: 2 },
-                    { label: 'July 4', slots: '14 Slots Available', id: 3 },
-                    { label: 'July 5', slots: '18 Slots Available', id: 4 },
-                    { label: 'July 6', slots: '11 Slots Available', id: 5 },
-                    { label: 'July 7', slots: '11 Slots Available', id: 6 },
-                    { label: 'July 8', slots: '11 Slots Available', id: 7 },
-                    { label: 'July 9', slots: '11 Slots Available', id: 8 }
-                ].map((slide, index) => (
+                {slideData.map((slide, index) => (
                     <SwiperSlide key={index}>
                         <div className='px-2 flex flex-col'>
                             <h3 className={`${activeIndex === index ? 'font-semibold text-xl ' : 'text-xl'}`}>{slide.label}</h3>
@@ -47,12 +74,11 @@ const Dio = () => {
                                 </p>
                             )}
                         </div>
-
                     </SwiperSlide>
                 ))}
             </Swiper>
             <div className='flex space-x-40 px-20 mt-8 flex-col border border-black'>
-                <Slot />
+                <Slot onSlotClick={handleSlotClick} activeLabel={slideData[activeIndex].label} />
             </div>
         </div>
     );

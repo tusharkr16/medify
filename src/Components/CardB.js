@@ -1,19 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { SiTicktick } from "react-icons/si";
+import React, { useState } from 'react';
 import img from "../assets/div.u-pos-has.png";
 import { BiSolidLike } from "react-icons/bi";
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-
-
-// import required modules
-import { Navigation } from 'swiper/modules';
-import Dio from '../Pages/Dio';
-
-const Card = ({ hospitalName, state, city }) => {
+const CardB = ({ hospitalName, state, city, slot, date }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -28,7 +17,23 @@ const Card = ({ hospitalName, state, city }) => {
                         <img src={img} alt="Hospital" />
                     </div>
                     <div className='ml-5 p-5 flex-grow'>
-                        <h2 className='text-primary-color font-semibold text-xl'>{hospitalName}</h2>
+                        <div className='flex justify-between'>
+                            <h2 className='text-primary-color font-semibold text-xl'>{hospitalName}</h2>
+                            <div className='space-x-3'>
+                                <button
+                                    className='p-2 rounded border border-blue-500 bg-transparent text-blue-500 whitespace-nowrap'
+                                >
+                                    {slot}
+                                </button>
+                                <button
+                                    className='p-2 rounded border border-blue-500 bg-transparent text-green-600 font-semibold text-md whitespace-nowrap'
+                                >
+                                    {date}
+                                </button>
+
+                            </div>
+
+                        </div>
                         <p className='font-semibold mt-5'>{city}, {state}</p>
                         <p>Smilesence center for dentistry +1 more</p>
                         <p>
@@ -39,21 +44,11 @@ const Card = ({ hospitalName, state, city }) => {
                             <BiSolidLike />
                         </button>
                     </div>
-                    <div className='p-5 flex flex-col justify-end'>
-                        <p className='text-green-600 font-semibold text-center mb-2'>Available Today</p>
-                        <button className='bg-primary-color text-white px-4 rounded py-2' onClick={toggleAccordion}>
-                            Book FREE Center Visit
-                        </button>
-                    </div>
+
                 </div>
-                {isOpen && (
-                    <div className="mt-3 bg-white p-4 rounded-md">
-                        <Dio hospitalName={hospitalName} city={city} state={state} />
-                    </div>
-                )}
             </div>
         </div>
     );
-};
+}
 
-export default Card;
+export default CardB
